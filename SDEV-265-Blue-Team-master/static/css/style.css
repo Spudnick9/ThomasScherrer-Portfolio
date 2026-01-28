@@ -1,0 +1,392 @@
+/* Apply Font */
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Make sure body fills the viewport */
+}
+
+.content {
+    flex: 1; /* Pushes the footer to the bottom */
+    padding: 20px;
+    text-align: center;
+}
+
+footer {
+    background-color: #000000; /* Ivy Tech Green */
+    color: white;
+    text-align: center;
+    padding: 10px;
+    position: relative;
+    width: 100%;
+    bottom: 0;
+}
+
+#chat-icon {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 70px;
+    height: 70px;
+    background-color: #006747;
+    color: white;
+    font-size: 40px;
+    text-align: center;
+    line-height: 70px;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 9999;
+}
+
+/* size of icon */
+#chat-icon img {
+    width: 40px;
+    height: auto;
+}
+
+/*Hide chatbot initially */
+.hidden {
+    display: none;
+}
+
+/* Chatbot Container (floating pop-up) */
+#chatbot-container {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 400px;
+    max-width: 100%;
+    height: 550px;
+    max-height: 600px;
+    background-color: #fff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+    z-index: 9999; /* to stay on top of other content */
+}
+
+/* Chatbox Area */
+#chatbox {
+    display: flex;
+    flex-direction: column;
+    height: 100%;  /* Ensure it takes full height */
+    min-height: 500px; /* Adjust as needed */
+    max-height: 550px;
+    border-top: 1px solid #ccc;
+}
+
+/* Chat Header (Title Area) */
+#chat-header {
+    background-color: #006747; /* Ivy Tech Green title*/
+    color: white;
+    padding: 10px;
+    text-align: center;
+}
+
+#chat-header h2 {
+    margin: 0;
+    font-size: 18px;
+    color: #8DC63F;
+
+}
+
+#chat-header p {
+    margin: 5px 0;
+    font-size: 14px;
+    font-weight: lighter;
+}
+.chat-logo {
+    width: 180px;  /* Adjust the size */
+    height: auto; /* Maintain aspect ratio */
+    display: block;
+    margin: 0 auto 1px; /* Center logo and add spacing below */
+}
+/* Chat Output (conversation area) */
+#chat-output {
+    flex: 1;
+    padding: 10px;
+    overflow-y: auto;
+    background: #f9f9f9;
+    color: #333;
+}
+
+/* Chat Input Area */
+#chat-input {
+    display: flex;
+    padding: 10px;
+    background: #f0f0f0;
+    border-top: 1px solid #ccc;
+}
+
+#user-input {
+    flex: 1;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-right: 10px;
+}
+
+#send-btn {
+    padding: 10px 15px;
+    font-size: 16px;
+    color: #fff;
+    background-color: #006747; /* maybe adjust this color */
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+#send-btn:hover {
+    background-color: #004d36; /* Darker Ivy Tech Green */
+}
+/* Admin Container */
+.admin-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    background-color: #333;
+    color: white;
+    border-radius: 8px;
+}
+
+.logout-btn {
+    background-color: #d9534f;
+    color: white;
+    padding: 8px 12px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.logout-btn:hover {
+    background-color: #c9302c;
+}
+
+
+.admin-container {
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Admin Header */
+.admin-container h1 {
+    text-align: center;
+    font-size: 24px;
+    color: #006747;
+    margin-bottom: 20px;
+}
+
+/* Admin Form */
+.admin-container form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* Form Labels */
+.admin-container label {
+    font-weight: bold;
+    color: #333;
+}
+
+/* Form Inputs */
+.admin-container input {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+/* Submit Button */
+.admin-container button {
+    padding: 10px 15px;
+    font-size: 16px;
+    color: #fff;
+    background-color: #006747;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.admin-container button:hover {
+    background-color: #004d36;
+}
+
+/* Success Message Styles */
+.success-message {
+    max-width: 600px; /* Center the message */
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #e6f4ea; /* Light green background */
+    border: 1px solid #006747; /* Ivy Tech green border */
+    border-radius: 8px;
+    text-align: center;
+    font-family: 'Roboto', sans-serif;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.success-message p {
+    font-size: 18px;
+    font-weight: bold;
+    color: #006747; /* Ivy Tech green text */
+    margin: 0 0 10px;
+}
+
+.success-message a {
+    font-size: 16px;
+    color: #004d36; /* Darker Ivy Tech green */
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.success-message a:hover {
+    text-decoration: underline; /* Underline on hover */
+}
+
+ /* navbar */
+ .navbar {
+    background-color: #006747; /* Ivy Tech Green */
+    padding: 15px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.nav-logo img {
+    height: 40px; /* Adjust logo size */
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-links li {
+    margin-left: 20px;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.nav-links a:hover {
+    text-decoration: underline;
+}
+
+/* improved buttons */
+.button {
+    display: inline-block;
+    background-color: #006747; /* Primary Button Color */
+    color: white;
+    padding: 12px 20px;
+    border-radius: 5px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+}
+    
+.button:hover {
+    background-color: #004d36; /* Darker shade for hover */
+}
+
+/* Responsive Design for phone */
+@media (max-width: 768px) {
+    
+    /* Center chatbot on phone */
+    #chatbot-container {
+        width: 95vw;
+        max-width: 400px;
+        height: 85vh;  /* test and adjust this as needed */
+        max-height: 600px;
+        bottom: 10px;
+        right: 10px;
+    }
+
+    #chatbox {        
+        min-height: 75vh; /*Make it taller */
+        max-height: 550px;
+        overflow-y: auto;
+    }
+
+    /* Keep input and send button aligned */
+    #chat-input {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        padding: 8px;
+    }
+
+    #user-input {
+        flex: 1; 
+        padding: 10px;
+        font-size: 14px;
+    }
+
+    #send-btn {
+        width: 25%; /* Button takes remaining space */
+        font-size: 14px;
+        padding: 8px;
+    }
+
+    /* Make chatbot header readable */
+    #chat-header {
+        padding: 10px; /* Add padding for better spacing */
+        font-size: 16px;
+    }
+
+    /* Ensure the chat bubble remains accessible */
+    #chat-icon {
+        width: 60px; /* Reduce size slightly */
+        height: 60px;
+        font-size: 35px;
+        line-height: 60px;
+    }
+
+    /* Keep the admin panel looking good */
+    .admin-container {
+        padding: 15px; /* Adjust padding for phone */
+    }
+
+    /* Keep search bar and responses scrollable */
+    #responses-list {
+        max-height: 300px;
+        overflow-y: auto;
+    }
+
+    /* Make pagination controls easy to tap */
+    #pagination-controls {
+        display: flex;
+        justify-content: center;
+        gap: 5px;
+        margin-top: 10px;
+    }
+
+    /* timestamps remain readable */
+    .timestamp {
+        font-size: 12px;
+        color: gray;
+        margin-left: 5px;
+    }
+
+
+}

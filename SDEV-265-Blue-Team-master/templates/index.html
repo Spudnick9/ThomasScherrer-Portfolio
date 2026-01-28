@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ivy Tech Chatbot</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    {% include 'partials/navbar.html' %}
+    <main class="content">
+        <!-- Main Content Goes Here -->
+        <h1>Welcome to Ivy Tech IT Department Chatbot!</h1>
+        <h2>Ask me anything about Ivy Tech's School of Information Technology!</h2>
+        <h3>Click the chat bubble icon in the bottom right to get started!</h3>
+    </main>
+    <!-- Chat Bubble Icon -->
+    <div id="chat-icon" onclick="toggleChatbot()">
+        💬
+    </div>
+    
+    <!-- Chatbot Container -->
+    <div id="chatbot-container" class="hidden">
+        <div id="chatbox">
+            <div id="chat-header">
+                <img src="{{ url_for('static', filename='images/ivy_logo.png') }}" alt="Chatbot Logo" class="chat-logo">
+                <h2>Chatbot</h2>
+            </div>
+            <div id="chat-output"></div>
+            <div id="chat-input">
+                <input type="text" id="user-input" placeholder="Hi, I am here to answer your Questions." />
+                <button id="send-btn">Send</button>
+            </div>
+        </div>
+    </div>
+
+    {% include 'partials/footer.html' %}
+
+    <script>
+        function toggleChatbot() {
+            const chatbot = document.getElementById("chatbot-container");
+            chatbot.classList.toggle("hidden");
+        }
+
+        // 🔥 Close chatbot when clicking outside
+        document.addEventListener("click", function(event) {
+            const chatbot = document.getElementById("chatbot-container");
+            const chatIcon = document.getElementById("chat-icon");
+
+            // ✅ If clicked outside the chatbot and not on the chat icon, close it
+            if (!chatbot.contains(event.target) && event.target !== chatIcon) {
+                chatbot.classList.add("hidden");
+            }
+        });
+
+        // ✅ Allow pressing "Enter" to send messages
+        document.getElementById("user-input").addEventListener("keydown", function(event) {
+            if (event.key === "Enter") {
+                event.preventDefault();
+                document.getElementById("send-btn").click();
+            }
+        });
+
+        // ✅ Handle chatbot responses
+        document.getElementById("send-btn").addEventListener("click", function() {
+            const userInput = document.getElementById("user-input").value.trim();
+            if (userInput === "") {
+                alert("Please enter a message.");
+                return;
+            }
+
+            const chatOutput = document.getElementById("chat-output");
+            const timestamp = new Date().toLocaleTimeString();
+            chatOutput.innerHTML += `<p><strong>You:</strong> ${userInput} <span class='timestamp'>(${timestamp})</span></p>`;
+            document.getElementById("user-input").value = "";
+            chatOutput.scrollTop = chatOutput.scrollHeight;
+
+            fetch("/get_response", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ "message": userInput })
+            })
+            .then(response => response.json())
+            .then(data => {
+                chatOutput.innerHTML += `<p><strong>Bot:</strong> ${data.response} <span class='timestamp'>(${timestamp})</span></p>`;
+                chatOutput.scrollTop = chatOutput.scrollHeight;
+            })
+            .catch(error => {
+                console.error("Error:", error);
+            });
+        });
+    </script>
+</body>
+
+</html>
